@@ -63,58 +63,35 @@ python src/main.py upload-garbage-to-icloud --num_files 15 --file_size_mb 100
 python src/main.py reupload-cleaned-photos-to-icloud
 ```
 
-## Workflow Diagram
+## Workflow Overview
 
-```mermaid
-graph TD
-    A[User Login & 2FA] --> B[iCloud Photos Downloader]
-    B --> C[Download Photos (1000 at a time)]
-    C --> D[Local Photo Storage]
-    D --> E[Detect Duplicates]
-    D --> F[Filter Content]
-    F --> F1[Drug Paraphernalia Detection]
-    F --> F2[Nudity Detection]
-    F --> F3[Profanity Detection]
-    F --> F4[Other Drug Detection]
-    E --> G[Duplicate Report]
-    F1 --> H[Flagged Content Report]
-    F2 --> H
-    F3 --> H
-    F4 --> H
-    G & H --> I[Generate Combined Report (CSV)]
-    I --> J[User Review & Local Deletion]
-    J --> K[Deleted Photos (Local)]
-    K --> L[iCloud Storage Sanitisation (DoD 5220.22-M ECE 7-pass)]
-    L --> M[Re-upload Cleaned Photos to iCloud]
-    M --> N[Clean iCloud Photo Library]
+Here's a step-by-step breakdown of how the iCloud Photo Manager processes your photos:
 
-    subgraph Advanced Data Protection Consideration
-        O[iCloud Advanced Data Protection Enabled?] --> P[If Yes, Manual Download/Upload May Be Required]
-        P --> Q[Otherwise, Automated Process Continues]
-    end
+1.  **User Authentication & Download:**
+    *   You provide your Apple ID and 2FA code.
+    *   The tool securely downloads your iCloud photos in batches (e.g., 1000 at a time) to your local storage.
 
-    style A fill:#f9f,stroke:#333,stroke-width:2px
-    style B fill:#bbf,stroke:#333,stroke-width:2px
-    style C fill:#bbf,stroke:#333,stroke-width:2px
-    style D fill:#ccf,stroke:#333,stroke-width:2px
-    style E fill:#fcf,stroke:#333,stroke-width:2px
-    style F fill:#bbf,stroke:#333,stroke-width:2px
-    style F1 fill:#bbf,stroke:#333,stroke-width:2px
-    style F2 fill:#bbf,stroke:#333,stroke-width:2px
-    style F3 fill:#bbf,stroke:#333,stroke-width:2px
-    style F4 fill:#bbf,stroke:#333,stroke-width:2px
-    style G fill:#fcf,stroke:#333,stroke-width:2px
-    style H fill:#fcf,stroke:#333,stroke-width:2px
-    style I fill:#bbf,stroke:#333,stroke-width:2px
-    style J fill:#bbf,stroke:#333,stroke-width:2px
-    style K fill:#ccf,stroke:#333,stroke-width:2px
-    style L fill:#bbf,stroke:#333,stroke-width:2px
-    style M fill:#bbf,stroke:#333,stroke-width:2px
-    style N fill:#9f9,stroke:#333,stroke-width:2px
-    style O fill:#ffc,stroke:#333,stroke-width:2px
-    style P fill:#ffc,stroke:#333,stroke-width:2px
-    style Q fill:#9f9,stroke:#333,stroke-width:2px
-```
+2.  **Local Photo Processing:**
+    *   **Duplicate Detection:** The tool identifies and reports any duplicate photos on your local machine.
+    *   **Content Filtering:** Advanced AI APIs meticulously scan your photos for:
+        *   Drug Paraphernalia
+        *   Nudity
+        *   Profanity
+        *   Other Drug-related content
+        *   (And other categories as supported by the integrated APIs)
+
+3.  **Reporting & Review:**
+    *   A comprehensive CSV report is generated, detailing duplicates and all flagged content.
+    *   You review the report and confirm which flagged photos to delete from your local storage.
+
+4.  **Secure iCloud Sanitisation (DoD 5220.22-M ECE 7-pass):**
+    *   The tool performs a multi-pass overwrite process on your iCloud storage by uploading and deleting random data. This adheres to the stringent DoD 5220.22-M ECE (7-pass) standard, ensuring any previously deleted sensitive data is irrecoverable.
+
+5.  **Re-upload Cleaned Photos:**
+    *   Your cleaned, filtered, and deduplicated photo collection is then re-uploaded to iCloud, ensuring your cloud library is pristine and secure.
+
+**Important Note on iCloud Advanced Data Protection:**
+If you have iCloud Advanced Data Protection enabled, automated downloading and uploading of photos via third-party tools may be restricted or require additional manual authorisation steps. In such cases, you may need to manually download your photos from iCloud.com and upload the cleaned photos back.
 
 
 
