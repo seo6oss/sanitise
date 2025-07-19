@@ -67,6 +67,23 @@ python src/main.py reupload-cleaned-photos-to-icloud
 
 Here's a step-by-step breakdown of how the iCloud Photo Manager processes your photos:
 
+```mermaid
+graph TD
+    A[User Input (Apple ID, 2FA)] --> B(Download Photos)
+    B --> C[Photos in DOWNLOAD_DIR]
+    C --> D{Detect Duplicates (pHash)}
+    C --> F{Filter Content (Expanded)}
+    D --> E[Duplicate List]
+    F --> G[Flagged Content List]
+    E --> H(Generate Report (CSV))
+    G --> H
+    H --> I{Confirm Deletion}
+    I --> J(Local Deletion)
+    J --> L[Upload Garbage to iCloud (Conceptual)]
+    L --> M[Re-upload Cleaned Photos to iCloud]
+    M --> K[Manual iCloud Deletion]
+```
+
 1.  **User Authentication & Download:**
     *   You provide your Apple ID and 2FA code.
     *   The tool securely downloads your iCloud photos in batches (e.g., 1000 at a time) to your local storage.
@@ -84,7 +101,7 @@ Here's a step-by-step breakdown of how the iCloud Photo Manager processes your p
     *   A comprehensive CSV report is generated, detailing duplicates and all flagged content.
     *   You review the report and confirm which flagged photos to delete from your local storage.
 
-4.  **Secure iCloud Sanitisation (DoD 5220.22-M ECE 7-pass):**
+4.  **Secure iCloud Sanitisation (DoD 5220.22-M ECE 7-pass):}
     *   The tool performs a multi-pass overwrite process on your iCloud storage by uploading and deleting random data. This adheres to the stringent DoD 5220.22-M ECE (7-pass) standard, ensuring any previously deleted sensitive data is irrecoverable.
 
 5.  **Re-upload Cleaned Photos:**
@@ -92,6 +109,7 @@ Here's a step-by-step breakdown of how the iCloud Photo Manager processes your p
 
 **Important Note on iCloud Advanced Data Protection:**
 If you have iCloud Advanced Data Protection enabled, automated downloading and uploading of photos via third-party tools may be restricted or require additional manual authorisation steps. In such cases, you may need to manually download your photos from iCloud.com and upload the cleaned photos back.
+
 
 
 
@@ -141,4 +159,5 @@ For enhanced security and privacy when managing your iCloud photos, consider the
 *   **Apple Lockdown Mode:** While primarily designed for extreme, targeted cyberattacks, enabling Lockdown Mode on your Apple devices can impact how iCloud photos are accessed and shared. Specifically, Shared Albums may be removed from the Photos app, and location information might be automatically excluded when sharing photos. Be aware of these implications if you use Lockdown Mode.
 *   **Virtual Private Network (VPN):** Using a reputable VPN service can encrypt your internet connection, providing an additional layer of security and privacy, especially when downloading or uploading sensitive data. This helps protect your data from potential eavesdropping or interception on unsecured networks.
 *   **Strong Passwords and Two-Factor Authentication (2FA):** Always use strong, unique passwords for your Apple ID and other online accounts. Ensure Two-Factor Authentication (2FA) is enabled for your Apple ID to significantly enhance the security of your iCloud account.
+
 
