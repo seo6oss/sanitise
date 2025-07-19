@@ -1,6 +1,14 @@
 # iCloud Photo Manager
 
-A command-line tool to manage iCloud photos. This tool helps you download your photos from iCloud, find duplicates, filter content, and generate a report for easy management.
+This powerful command-line tool offers a comprehensive solution for managing your iCloud photo library, focusing on privacy, content moderation, and secure data handling. It's designed to help you identify and remove potentially sensitive or unwanted content, ensuring your personal cloud storage remains clean and secure.
+
+Key capabilities include:
+
+*   **Intelligent Content Filtering:** Utilising advanced AI-driven APIs, the tool meticulously scans your photos to detect and flag a wide range of explicit or undesirable content, such as nudity, drug paraphernalia, profanity, and other illicit imagery. This ensures you maintain full control over the visual content stored in your iCloud.
+*   **Duplicate Detection:** Efficiently identifies and reports duplicate photographs, helping you reclaim valuable storage space.
+*   **Secure iCloud Sanitisation:** Beyond simple deletion, this tool employs a robust data sanitisation process, adhering to the stringent **DoD 5220.22-M ECE (7-pass)** government standard. This ensures that any removed sensitive data is overwritten multiple times, rendering it irrecoverable and providing you with peace of mind.
+*   **Comprehensive Reporting:** Generates detailed reports outlining flagged content and duplicates, empowering you to make informed decisions about your photo library.
+*   **Automated Management:** Streamlines the process of downloading, analysing, and re-uploading your curated photo collection, making iCloud management straightforward and efficient.
 
 ## Installation
 
