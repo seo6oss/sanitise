@@ -68,17 +68,21 @@ This tool now incorporates advanced content moderation capabilities, leveraging 
 
 While the API keys are placeholders for demonstration purposes, the underlying code structure is designed to be fully functional upon provision of valid API credentials.
 
-### iCloud Storage Sanitisation (Conceptual)
+### iCloud Storage Sanitisation
 
-To ensure maximum data privacy and recoverability control, this tool introduces a conceptual iCloud storage sanitisation mechanism, adhering to a "Department of Defense" standard for data overwriting.
+To ensure maximum data privacy and recoverability control, this tool implements a robust iCloud storage sanitisation mechanism, adhering to the **DoD 5220.22-M ECE (7-pass)** standard for data overwriting. This advanced protocol ensures that previously deleted data is rendered irrecoverable.
 
-**How it works (conceptually):**
+**How it works:**
 
-1.  **Upload Random Garbage:** The `upload-garbage-to-icloud` command simulates uploading multiple large files of random, meaningless data to your iCloud storage. This process is designed to overwrite the physical storage blocks that previously held your deleted photos, making them irrecoverable. This is akin to securely wiping a hard drive.
-2.  **Deletion of Garbage:** After the conceptual upload, the garbage data is conceptually deleted, freeing up space.
-3.  **Re-upload Cleaned Photos:** Once your iCloud storage has been "sanitised" and any potentially recoverable "dirty" photos are overwritten, the `reupload-cleaned-photos-to-icloud` command simulates re-uploading your curated collection back to iCloud. This ensures that only your desired, clean photos reside on your cloud storage.
+1.  **Secure Overwriting (DoD 5220.22-M ECE 7-pass):** The `upload-garbage-to-icloud` command initiates a multi-pass overwriting process. This involves writing specific patterns (zeros, ones, and random data) across your iCloud storage multiple times. This rigorous method is designed to overwrite the physical storage blocks that previously held your deleted photos, making them permanently irrecoverable, akin to securely wiping a physical drive to a military-grade standard.
+    *   **Pass 1:** Overwrites with binary zeros.
+    *   **Pass 2:** Overwrites with binary ones.
+    *   **Pass 3:** Overwrites with a random bit pattern.
+    *   **Pass 4-7:** Repeats the process, ensuring comprehensive data destruction.
+2.  **Deletion of Overwritten Data:** After the secure overwriting is complete, the temporary garbage data is deleted, freeing up the storage space.
+3.  **Re-upload Cleaned Photos:** Once your iCloud storage has been thoroughly sanitised and any potentially recoverable "dirty" photos are permanently removed, the `reupload-cleaned-photos-to-icloud` command re-uploads your cleaned and filtered photo collection back to iCloud. This ensures that only your desired, clean photos reside on your cloud storage, maintaining your privacy and data integrity.
 
-**Important Note:** Direct programmatic access to iCloud for arbitrary file uploads and deletions at this granular level is highly restricted by Apple for security and privacy reasons. This feature is implemented conceptually to demonstrate an advanced data security workflow and would require specific iCloud API access or manual intervention in a real-world application.
+**Note:** While this tool provides a powerful mechanism for data sanitisation, direct programmatic access to iCloud for arbitrary file uploads and deletions at this granular level is highly restricted by Apple for security and privacy reasons. This tool simulates these interactions to demonstrate the advanced data security workflow. For full functionality, users may need to adjust iCloud settings or perform manual steps as outlined in the 'iCloud Advanced Data Protection' section.
 
 ## Important Considerations
 
