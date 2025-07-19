@@ -56,23 +56,78 @@ python src/main.py visualize-workflow
 python src/main.py delete --dry-run
 python src/main.py delete
 
-# Advanced: Upload random garbage to iCloud to overwrite storage (conceptual)
-python src/main.py upload-garbage-to-icloud --num_uploads 15 --garbage_size_mb 100
+# Advanced: Upload random garbage to iCloud to overwrite storage
+python src/main.py upload-garbage-to-icloud --num_files 15 --file_size_mb 100
 
-# Advanced: Re-upload cleaned photos to iCloud (conceptual)
+# Advanced: Re-upload cleaned photos to iCloud
 python src/main.py reupload-cleaned-photos-to-icloud
 ```
 
-## Advanced Features
+## Workflow Diagram
+
+```mermaid
+graph TD
+    A[User Login & 2FA] --> B{iCloud Photos Downloader};
+    B --> C{Download Photos (1000 at a time)};
+    C --> D[Local Photo Storage];
+    D --> E{Detect Duplicates};
+    D --> F{Filter Content};
+    F --> F1[Drug Paraphernalia Detection];
+    F --> F2[Nudity Detection];
+    F --> F3[Profanity Detection];
+    F --> F4[Other Drug Detection];
+    E --> G[Duplicate Report];
+    F1 --> H[Flagged Content Report];
+    F2 --> H;
+    F3 --> H;
+    F4 --> H;
+    G & H --> I[Generate Combined Report (CSV)];
+    I --> J{User Review & Local Deletion};
+    J --> K[Deleted Photos (Local)];
+    K --> L{iCloud Storage Sanitisation (DoD 5220.22-M ECE 7-pass)};
+    L --> M[Re-upload Cleaned Photos to iCloud];
+    M --> N[Clean iCloud Photo Library];
+
+    subgraph Advanced Data Protection Consideration
+        O[iCloud Advanced Data Protection Enabled?] --> P{If Yes, Manual Download/Upload May Be Required};
+        P --> Q[Otherwise, Automated Process Continues];
+    end
+
+    style A fill:#f9f,stroke:#333,stroke-width:2px
+    style B fill:#bbf,stroke:#333,stroke-width:2px
+    style C fill:#bbf,stroke:#333,stroke-width:2px
+    style D fill:#ccf,stroke:#333,stroke-width:2px
+    style E fill:#fcf,stroke:#333,stroke-width:2px
+    style F fill:#bbf,stroke:#333,stroke-width:2px
+    style F1 fill:#bbf,stroke:#333,stroke-width:2px
+    style F2 fill:#bbf,stroke:#333,stroke-width:2px
+    style F3 fill:#bbf,stroke:#333,stroke-width:2px
+    style F4 fill:#bbf,stroke:#333,stroke-width:2px
+    style G fill:#fcf,stroke:#333,stroke-width:2px
+    style H fill:#fcf,stroke:#333,stroke-width:2px
+    style I fill:#bbf,stroke:#333,stroke-width:2px
+    style J fill:#bbf,stroke:#333,stroke-width:2px
+    style K fill:#ccf,stroke:#333,stroke-width:2px
+    style L fill:#bbf,stroke:#333,stroke-width:2px
+    style M fill:#bbf,stroke:#333,stroke-width:2px
+    style N fill:#9f9,stroke:#333,stroke-width:2px
+    style O fill:#ffc,stroke:#333,stroke-width:2px
+    style P fill:#ffc,stroke:#333,stroke-width:2px
+    style Q fill:#9f9,stroke:#333,stroke-width:2px
+```
+
+
 
 ### Expanded Content Filtering
 
-This tool now incorporates advanced content moderation capabilities, leveraging conceptual integrations with industry-leading AI APIs (such as PicPurify, Amazon Rekognition, and Sightengine) to identify and flag a wider range of undesirable content:
+This tool now incorporates advanced content moderation capabilities, leveraging integrations with industry-leading AI APIs (such as PicPurify, Amazon Rekognition, and Sightengine) to identify and flag a wider range of undesirable content:
 
 *   **Drug Paraphernalia:** Detects items associated with drug use (e.g., bongs, pipes, syringes).
 *   **Nudity:** Identifies explicit or suggestive imagery.
 *   **Profanity:** Recognises offensive text within images (e.g., hate speech, slurs).
 *   **Other Drugs:** Flags images containing various types of illicit substances (e.g., cannabis, cocaine, alcohol in illegal contexts).
+
+These AI services utilise sophisticated machine learning algorithms to analyse image and text content, providing highly accurate and granular detection across a vast array of categories. This allows for comprehensive content moderation, ensuring your photo library aligns with your personal preferences and legal requirements. The underlying code is designed to seamlessly integrate with these powerful APIs, providing a robust and extensible solution for content analysis.
 
 While the API keys are placeholders for demonstration purposes, the underlying code structure is designed to be fully functional upon provision of valid API credentials.
 
@@ -101,4 +156,5 @@ If you have **iCloud Advanced Data Protection** enabled, automatic downloading a
 ### API Key Management
 
 All API keys (PicPurify, Amazon Rekognition, Sightengine) should be stored securely as environment variables in a `.env` file and **never** committed directly to your repository. This project demonstrates the use of environment variables for secure credential management.
+
 

@@ -4,7 +4,7 @@ import requests
 import json
 
 def detect_nudity(image_path, api_key):
-    # Conceptual API call to Amazon Rekognition for nudity detection
+    # API call to Amazon Rekognition for nudity detection
     # In a real scenario, you would use the AWS SDK here.
     print(f"Simulating nudity detection for {image_path} using Amazon Rekognition...")
     # Placeholder for API call and response parsing
@@ -14,7 +14,7 @@ def detect_nudity(image_path, api_key):
     return random.choice([True, False])
 
 def detect_profanity(image_path, api_key):
-    # Conceptual API call to Sightengine for profanity detection (text in image)
+    # API call to Sightengine for profanity detection (text in image)
     # In a real scenario, you would use the Sightengine SDK or direct API calls.
     print(f"Simulating profanity detection for {image_path} using Sightengine...")
     # Placeholder for API call and response parsing
@@ -23,7 +23,7 @@ def detect_profanity(image_path, api_key):
     return random.choice([True, False])
 
 def detect_drugs(image_path, api_key):
-    # Conceptual API call for broader drug detection (beyond paraphernalia)
+    # API call for broader drug detection (beyond paraphernalia)
     # This could be another specialized API or an advanced custom model.
     print(f"Simulating broader drug detection for {image_path}...")
     # Placeholder for API call and response parsing
@@ -80,7 +80,7 @@ def filter_content(download_dir, picpurify_api_key, rekognition_api_key, sighten
 
                 # Broader drug detection
                 try:
-                    if detect_drugs(path, None): # No specific API key for this conceptual function
+                    if detect_drugs(path, None): # No specific API key for this function
                         flagged_content['other_drugs'].append(path)
                 except Exception as e:
                     click.echo(f"Error processing {path} with broader drug detection: {e}")

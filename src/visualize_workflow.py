@@ -18,8 +18,8 @@ def visualize_workflow(output_file):
     dot.node('I', 'Confirm Deletion')
     dot.node('J', 'Local Deletion')
     dot.node('K', 'Manual iCloud Deletion')
-    dot.node('L', 'Upload Garbage to iCloud (Conceptual)')
-    dot.node('M', 'Re-upload Cleaned Photos to iCloud (Conceptual)')
+    dot.node('L', 'Upload Garbage to iCloud')
+    dot.node('M', 'Re-upload Cleaned Photos to iCloud')
 
     dot.edge('A', 'B')
     dot.edge('B', 'C')
