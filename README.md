@@ -134,4 +134,11 @@ If you have **iCloud Advanced Data Protection** enabled, automatic downloading a
 
 All API keys (PicPurify, Amazon Rekognition, Sightengine) should be stored securely as environment variables in a `.env` file and **never** committed directly to your repository. This project demonstrates the use of environment variables for secure credential management.
 
+### Additional Security Measures
+
+For enhanced security and privacy when managing your iCloud photos, consider the following:
+
+*   **Apple Lockdown Mode:** While primarily designed for extreme, targeted cyberattacks, enabling Lockdown Mode on your Apple devices can impact how iCloud photos are accessed and shared. Specifically, Shared Albums may be removed from the Photos app, and location information might be automatically excluded when sharing photos. Be aware of these implications if you use Lockdown Mode.
+*   **Virtual Private Network (VPN):** Using a reputable VPN service can encrypt your internet connection, providing an additional layer of security and privacy, especially when downloading or uploading sensitive data. This helps protect your data from potential eavesdropping or interception on unsecured networks.
+*   **Strong Passwords and Two-Factor Authentication (2FA):** Always use strong, unique passwords for your Apple ID and other online accounts. Ensure Two-Factor Authentication (2FA) is enabled for your Apple ID to significantly enhance the security of your iCloud account.
 
