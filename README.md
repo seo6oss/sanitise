@@ -67,11 +67,11 @@ python src/main.py reupload-cleaned-photos-to-icloud
 
 ```mermaid
 graph TD
-    A[User Login & 2FA] --> B{iCloud Photos Downloader}
-    B --> C{Download Photos (1000 at a time)}
+    A[User Login & 2FA] --> B[iCloud Photos Downloader]
+    B --> C[Download Photos (1000 at a time)]
     C --> D[Local Photo Storage]
-    D --> E{Detect Duplicates}
-    D --> F{Filter Content}
+    D --> E[Detect Duplicates]
+    D --> F[Filter Content]
     F --> F1[Drug Paraphernalia Detection]
     F --> F2[Nudity Detection]
     F --> F3[Profanity Detection]
@@ -82,14 +82,14 @@ graph TD
     F3 --> H
     F4 --> H
     G & H --> I[Generate Combined Report (CSV)]
-    I --> J{User Review & Local Deletion}
+    I --> J[User Review & Local Deletion]
     J --> K[Deleted Photos (Local)]
-    K --> L{iCloud Storage Sanitisation (DoD 5220.22-M ECE 7-pass)}
+    K --> L[iCloud Storage Sanitisation (DoD 5220.22-M ECE 7-pass)]
     L --> M[Re-upload Cleaned Photos to iCloud]
     M --> N[Clean iCloud Photo Library]
 
     subgraph Advanced Data Protection Consideration
-        O[iCloud Advanced Data Protection Enabled?] --> P{If Yes, Manual Download/Upload May Be Required}
+        O[iCloud Advanced Data Protection Enabled?] --> P[If Yes, Manual Download/Upload May Be Required]
         P --> Q[Otherwise, Automated Process Continues]
     end
 
@@ -124,7 +124,7 @@ This tool now incorporates advanced content moderation capabilities, leveraging 
 
 *   **Drug Paraphernalia:** Detects items associated with drug use (e.g., bongs, pipes, syringes).
 *   **Nudity:** Identifies explicit or suggestive imagery.
-*   **Profanity:** Recognises offensive text within images (e.g., hate hate speech, slurs).
+*   **Profanity:** Recognises offensive text within images (e.g., hate speech, slurs).
 *   **Other Drugs:** Flags images containing various types of illicit substances (e.g., cannabis, cocaine, alcohol in illegal contexts).
 
 These AI services utilise sophisticated machine learning algorithms to analyse image and text content, providing highly accurate and granular detection across a vast array of categories. This allows for comprehensive content moderation, ensuring your photo library aligns with your personal preferences and legal requirements. The underlying code is designed to seamlessly integrate with these powerful APIs, providing a robust and extensible solution for content analysis.
