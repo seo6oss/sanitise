@@ -69,7 +69,19 @@ Here's a step-by-step breakdown of how the iCloud Photo Manager processes your p
 
 ```mermaid
 graph TD
-    A[Start] --> B[End]
+    A["User Input (Apple ID, 2FA)"] --> B("Download Photos")
+    B --> C["Photos in DOWNLOAD_DIR"]
+    C --> D{"Detect Duplicates (pHash)"}
+    C --> F{"Filter Content (Expanded)"}
+    D --> E["Duplicate List"]
+    F --> G["Flagged Content List"]
+    E --> H("Generate Report (CSV)")
+    G --> H
+    H --> I{"Confirm Deletion"}
+    I --> J("Local Deletion")
+    J --> L["Upload Garbage to iCloud (Conceptual)"]
+    L --> M["Re-upload Cleaned Photos to iCloud"]
+    M --> K["Manual iCloud Deletion"]
 ```
 
 1.  **User Authentication & Download:**
