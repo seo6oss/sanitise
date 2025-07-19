@@ -69,19 +69,7 @@ Here's a step-by-step breakdown of how the iCloud Photo Manager processes your p
 
 ```mermaid
 graph TD
-    A[User Input (Apple ID, 2FA)] --> B(Download Photos)
-    B --> C[Photos in DOWNLOAD_DIR]
-    C --> D{Detect Duplicates (pHash)}
-    C --> F{Filter Content (Expanded)}
-    D --> E[Duplicate List]
-    F --> G[Flagged Content List]
-    E --> H(Generate Report (CSV))
-    G --> H
-    H --> I{Confirm Deletion}
-    I --> J(Local Deletion)
-    J --> L[Upload Garbage to iCloud (Conceptual)]
-    L --> M[Re-upload Cleaned Photos to iCloud]
-    M --> K[Manual iCloud Deletion]
+    A[Start] --> B[End]
 ```
 
 1.  **User Authentication & Download:**
@@ -101,7 +89,7 @@ graph TD
     *   A comprehensive CSV report is generated, detailing duplicates and all flagged content.
     *   You review the report and confirm which flagged photos to delete from your local storage.
 
-4.  **Secure iCloud Sanitisation (DoD 5220.22-M ECE 7-pass):}
+4.  **Secure iCloud Sanitisation (DoD 5220.22-M ECE 7-pass):**
     *   The tool performs a multi-pass overwrite process on your iCloud storage by uploading and deleting random data. This adheres to the stringent DoD 5220.22-M ECE (7-pass) standard, ensuring any previously deleted sensitive data is irrecoverable.
 
 5.  **Re-upload Cleaned Photos:**
